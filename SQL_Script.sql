@@ -96,6 +96,7 @@ CREATE TABLE RoomTypeFacility (
     FOREIGN KEY (FacilityID) REFERENCES Facility(FacilityID)
 )
 
+-- Create Guest Table
 CREATE TABLE Guest (
     GuestID INT IDENTITY(1,1) PRIMARY KEY,
     GuestName VARCHAR(255) NOT NULL,
@@ -103,7 +104,7 @@ CREATE TABLE Guest (
     GuestEmailAddress VARCHAR(100) NOT NULL  
 )
 
-
+-- Create Booking Table
 CREATE TABLE Booking (
     BookingID INT IDENTITY(1,1) PRIMARY KEY,
     NumberOfGuests INT NOT NULL,
@@ -120,7 +121,7 @@ CREATE TABLE Booking (
  		REFERENCES Room(RoomID)
 )
 
-
+-- Create Invoice Table
 CREATE TABLE Invoice (
     InvoiceID INT IDENTITY(1,1) PRIMARY KEY,
     BookingID INT NOT NULL,   
@@ -133,12 +134,12 @@ CREATE TABLE Invoice (
     FOREIGN KEY (PaymentMethodID) REFERENCES PaymentMethod(PaymentMethodID)
 )
 
-
+-- Create Payment Method Table
 CREATE TABLE PaymentMethod (
     PaymentMethodName VARCHAR(50) CHECK (PaymentMethodName IN ('CashPayment', 'CreditCardPayment', 'DebitCardPayment', 'Gcash'))
 )   PaymentMethodID INT IDENTITY(1,1) PRIMARY KEY,
  
-
+-- Create Payment Table
 CREATE TABLE Payment (
     PaymentID INT IDENTITY(1,1) PRIMARY KEY,
     InvoiceID INT NOT NULL,  
@@ -149,6 +150,7 @@ CREATE TABLE Payment (
     FOREIGN KEY (PaymentMethodID) REFERENCES PaymentMethod(PaymentMethodID)
 )
 
+-- Create Staff Table
 CREATE TABLE Staff (
     StaffID INT IDENTITY(1,1) PRIMARY KEY,
     StaffName VARCHAR(255) NOT NULL,
@@ -159,7 +161,7 @@ CREATE TABLE Staff (
     ShiftTime VARCHAR(20) CHECK (ShiftTime IN ('Morning', 'Afternoon', 'Evening')) NOT NULL  
 )
 
-
+-- Create Room Maintenance Log Table
 CREATE TABLE RoomMaintenanceLog (
     MaintenanceID INT IDENTITY(1,1) PRIMARY KEY,
     RoomID INT NOT NULL,  
@@ -170,6 +172,7 @@ CREATE TABLE RoomMaintenanceLog (
    		FOREIGN KEY (StaffID) REFERENCES Staff(StaffID)
 )
 
+-- Create Housekeeping Task Table
 CREATE TABLE HousekeepingTask (
     HousekeepingTaskID INT IDENTITY(1,1) PRIMARY KEY,
     RoomID INT NOT NULL,  
@@ -180,6 +183,7 @@ CREATE TABLE HousekeepingTask (
     FOREIGN KEY (RoomID) REFERENCES Room(RoomID)
 )
 
+-- Create Schedule Table
 CREATE TABLE Schedule (
     ScheduleID INT IDENTITY(1,1) PRIMARY KEY,
     StaffID INT NOT NULL,  
